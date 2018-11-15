@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>BloodApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/form.css">
+</head>
+<body>
+  <div class="wrapper">
+    <main>
+      <header>
+        <h1>BloodApp</h1>
+        <p><em>Welcome &ltuser&gt. Your at building form screen.</em></p>
+      </header>
+
+    
+      <button class="button-back-arrow" title="back-arrow" id="button-back-arrow" >
+          <img src="/img/back_empty.png" alt="">
+      </button>
+
+
+      <div class="container">
+          <form id="save-building-form">
+            
+            <div class="row">
+              <div class="col-25">
+                <label for="cnpjname">CNPJ</label>
+              </div>
+              <div class="col-75">
+                <input type="text" id="cnpj" value="99.999.999/9999-99">
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-25">
+                <label for="fname">Razão Social</label>
+              </div>
+              <div class="col-75">
+                <input type="text" id="company-name" placeholder="Razão social">
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                  <label for="fname">N. Fantasia</label>
+                </div>
+                <div class="col-75">
+                  <input type="text" id="trading-name" placeholder="Nome fantasia">
+                </div>
+              </div>
+
+            <div class="row">
+                <div class="col-25">
+                  <label for="endname">Endereço</label>
+                </div>
+                <div class="col-75">
+                  <input type="text" id="address" placeholder="Rua, Número, Complemento, CEP, Cidade e UF">
+                </div>
+              </div>
+
+            <div class="row">
+              <div class="col-25">
+                <label for="ename">E-mail</label>
+              </div>
+              <div class="col-75">
+                <input type="email" id="email" name="email" placeholder="usuario@bloodapp.com">
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                  <label for="ename">Senha</label>
+                </div>
+                <div class="col-75">
+                  <input type="password" id="password" name="password" placeholder="Mínimo de 6 dígitos...">
+                </div>
+            </div>
+
+            <div class="row" hidden>
+              <div class="col-25">
+                <label for="type">Type</label>
+              </div>
+              <div class="col-75">
+                <select id="type" name="type">
+                  <option >user</option>
+                  <option >building</option>
+                  <option >admin</option>
+                </select>
+              </div>
+            </div>
+            <!--div class="row">
+              <div class="col-25">
+                <label for="subject">Subject</label>
+              </div>
+              <div class="col-75">
+                <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+              </div>
+            </div-->
+            <div class="row">
+              <div>
+                  <input id="building-save" type="button" value="Salvar">
+              </div>
+              <div >
+                  <input id="clearing" type="button" value="Limpar">
+              </div>
+            </div>
+        
+          </form>
+        </div>
+
+
+
+    </main>
+
+    <h3>Building List</h3>
+    
+         <table id="tbl_users_list" border="1">
+            <tr>
+                <td>#ID</td>
+                <td>BUILDING</td>
+            </tr>
+         </table>
+
+    <footer>
+      <small><a href="">View Source</a></small>
+    </footer>
+  </div>
+
+  <!-- Firebase SDK -->
+  <!--script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+  <script src="firebase.js"></script-->
+
+  <script src="/__/firebase/5.5.1/firebase.js"></script>
+  <script src="/__/firebase/init.js"></script>
+
+  <script src="/js/building.js"></script>
+</body>
+</html>
