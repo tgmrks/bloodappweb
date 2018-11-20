@@ -27,7 +27,7 @@ exports.sendNotification = functions.database.ref('/notifications/{notificationI
   const NOTIFICATION_SNAPSHOT = change.after;
   const payload = {
     notification: {
-      title: `New Message from ${NOTIFICATION_SNAPSHOT.val().user}!`,
+      title: `Mensagem de ${NOTIFICATION_SNAPSHOT.val().user}!`,
       body: NOTIFICATION_SNAPSHOT.val().message
       //click_action: `https://${functions.config().firebase.authDomain}`
     }
@@ -59,7 +59,7 @@ exports.sendNotification = functions.database.ref('/notifications/{notificationI
       }
     console.log(tokens.entries());
 
-admin.messaging().send
+    //admin.messaging().send;
 
     return admin.messaging().sendToDevice(tokens, payload)
     .then((response) => cleanInvalidTokens(tokensWithKey, response.results))

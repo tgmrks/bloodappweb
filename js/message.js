@@ -22,8 +22,9 @@
   /*
   subscribeButton.addEventListener('click', subscribeToNotification);
   unsubscribeButton.addEventListener('click', unsubscribeToNotification);
-  sendNotificationForm.addEventListener('submit', sendNotification);
 */
+  sendNotificationForm.addEventListener('submit', sendNotification);
+
   backArrownButton.addEventListener('click',goBack);
   /* ========================
     Functions
@@ -97,11 +98,12 @@
 
     const notificationMessage = document.getElementById('notification-message').value;
 
-    //teste
-    console.log(notificationMessage);
+    var msgFrom = FIREBASE_AUTH.currentUser.displayName != undefined ? FIREBASE_AUTH.currentUser.displayName : sessionStorage.getItem("buid");
+
+    console.log(notificationMessage, msgFrom);
 
     FIREBASE_DATABASE.ref('/notifications').push({
-      user: FIREBASE_AUTH.currentUser.displayName,
+      user: msgFrom,
       message: notificationMessage
     }).then(() => {
       document.getElementById('notification-message').value = "";
