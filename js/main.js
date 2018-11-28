@@ -32,6 +32,9 @@
   ======================== */
 
   function reloadPage() {
+    
+    //console.log(getDate());
+    
     console.log('HOME');
     window.location.reload();
     console.log("uid: " + sessionStorage.getItem("uid"));
@@ -116,5 +119,28 @@
             alert('The user is created successfully!');
             //reload_page();
       }
+
+      function getDate() {
+        
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+            var hh = today.getHours();
+            var mn = today.getMinutes();
+            
+            if(dd<10) {
+                dd = '0'+dd
+            } 
+            
+            if(mm<10) {
+                mm = '0'+mm
+            } 
+            
+            today = mm + '/' + dd + '/' + yyyy + " " + hh + ":" + mn;
+            //document.write(today);
+            return today;
+      }
+        
 
 }

@@ -98,16 +98,60 @@
 
     const notificationMessage = document.getElementById('notification-message').value;
 
-    var msgFrom = FIREBASE_AUTH.currentUser.displayName != undefined ? FIREBASE_AUTH.currentUser.displayName : sessionStorage.getItem("buid");
+    //var msgFrom = FIREBASE_AUTH.currentUser.displayName != undefined ? FIREBASE_AUTH.currentUser.displayName : sessionStorage.getItem("buid");
+    var msgFrom = sessionStorage.getItem("buid");
+    var buidName, buidAddress;
 
-    console.log(notificationMessage, msgFrom);
-
-    FIREBASE_DATABASE.ref('/notifications').push({
-      user: msgFrom,
-      message: notificationMessage
+    FIREBASE_DATABASE.ref('/users/'+ msgFrom).once('value')
+    .then((snapshot) => {
+      if (snapshot.val()) {
+        buidName = snapshot.val().tradingName;
+        buidAddress = snapshot.val().address;
+      } else {
+        console.log('something went wrong');
+      }
     }).then(() => {
-      document.getElementById('notification-message').value = "";
-    })
+
+      var today = getDate();
+      console.log(buidName, buidAddress);
+      console.log(notificationMessage, msgFrom);
+      console.log(today);
+  
+        FIREBASE_DATABASE.ref('/notifications').push({
+          buid: msgFrom,
+          user: buidName,
+          address: buidAddress,
+          message: notificationMessage,
+          date: today
+    
+        }).then(() => {
+          document.getElementById('notification-message').value = "";
+        })
+    });  
+
+  }
+
+  function getDate() {
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    var hh = today.getHours();
+    var mn = today.getMinutes();
+    
+    
+    if(dd<10) {
+        dd = '0'+dd
+    } 
+    
+    if(mm<10) {
+        mm = '0'+mm
+    } 
+    
+    today = mm + '/' + dd + '/' + yyyy + " " + hh + ":" + mn;
+    //document.write(today);
+    return today;
   }
 
 }
