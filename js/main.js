@@ -8,10 +8,12 @@
   const FIREBASE_DATABASE = firebase.database();
 
   const homeButton = document.getElementById('home-screen');
+  const reportsButton = document.getElementById('reports-screen');
   const addBuildingButton = document.getElementById('add-building-screen');
   const addUserButton = document.getElementById('add-user-screen');
   const sendNotificationButton = document.getElementById('send-notification-screen');
   const signOutButton = document.getElementById('sign-out');
+  const greetingsText = document.getElementById('greetings');
 
   //const currentUser = FIREBASE_AUTH.currentUSer
 
@@ -22,6 +24,7 @@
   //FIREBASE_AUTH.onAuthStateChanged(handleAuthStateChanged);
 
   homeButton.addEventListener('click', reloadPage);
+  reportsButton.addEventListener('click', showReports);
   addBuildingButton.addEventListener('click', addBuildingScreen);
   addUserButton.addEventListener('click', addUserScreen);
   sendNotificationButton.addEventListener('click', sendNotificationScreen);
@@ -39,6 +42,10 @@
     window.location.reload();
     console.log("uid: " + sessionStorage.getItem("uid"));
     console.log("email: " + sessionStorage.getItem("email"));
+  }
+
+  function showReports() {
+    window.location.pathname = 'reports.html'
   }
 
   function addBuildingScreen() {
@@ -61,6 +68,7 @@
 
   FIREBASE_AUTH.onAuthStateChanged(firebaseUser => {
     if(firebaseUser) {
+
         console.log('LOGGED !!');
         console.log(firebaseUser.email);
         console.log("uid: " + sessionStorage.getItem("uid"));
@@ -83,14 +91,18 @@
     var type = sessionStorage.getItem("type");
     console.log(type);
     if (type == 'admin') {
+      reportsButton.removeAttribute("hidden");
       addBuildingButton.removeAttribute("hidden");
       addUserButton.removeAttribute("hidden");
       sendNotificationButton.removeAttribute("hidden");
+      //greetingsText.innerText("Seja bem-vindo(a), " + sessionStorage.getItem("fullname"));
     } else if (type == 'building') {
       addUserButton.removeAttribute("hidden");
       sendNotificationButton.removeAttribute("hidden");
+      //greetingsText.innerText("Seja bem-vindo, " + sessionStorage.getItem("tradingName"));
     } else if (type == 'user') {
       sendNotificationButton.removeAttribute("hidden");
+      //greetingsText.innerText("Seja bem-vindo(a), " + sessionStorage.getItem("fullname"));
     } else {
       alert('something went wrong! User type undefined...');
     }

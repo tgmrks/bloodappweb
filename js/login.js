@@ -79,6 +79,8 @@
           sessionStorage.setItem("address", snapshot.val().address);
           sessionStorage.setItem("tradingName", snapshot.val().tradingName);
           sessionStorage.setItem("companyName", snapshot.val().companyName);  
+        } else {
+          sessionStorage.setItem("fullname", snapshot.val().fullname); 
         }
       
       } else {

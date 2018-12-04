@@ -13,7 +13,9 @@
     <main>
       <header>
         <h1>BloodApp</h1>
-        <p><em>Welcome &ltuser&gt. Your at user form screen.</em></p>
+        <!--p><em>Welcome &ltuser&gt. Your at user form screen.</em></p-->
+        <p><em>Bem vindo ao cadastro de funcionarios.</em></p>
+        
       </header>
 
       <button class="button-back-arrow" title="back-arrow" id="button-back-arrow" >
@@ -28,7 +30,7 @@
                 <label for="cpfname">CPF</label>
               </div>
               <div class="col-75">
-                <input type="text" id="cpf" value="999.999.999-99">
+                <input type="text" id="cpf" placeholder="999.999.999-99">
               </div>
             </div>
 
@@ -102,14 +104,14 @@
     </main>
 
 
-    <h3>Users List</h3>
+    <!--h3>Users List</h3>
     
          <table id="tbl_users_list" border="1">
             <tr>
                 <td>#ID</td>
                 <td>NAME</td>
             </tr>
-         </table>
+         </table-->
 
     <footer>
       <small><a href="">View Source</a></small>
@@ -124,5 +126,12 @@
   <script src="/__/firebase/init.js"></script>
 
   <script src="/js/user.js"></script>
+  <script src="js/jquery-1.2.6.pack.js" type="text/javascript"></script>
+  <script src="js/jquery.maskedinput-1.1.4.pack.js" type="text/javascript" /></script>
+  <script type="text/javascript">
+    $(document).ready(function(){	
+      $("#cpf").mask("999.999.999-99");
+    });
+  </script>
 </body>
 </html>

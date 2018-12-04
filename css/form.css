@@ -101,3 +101,9 @@ div div {
   .form-login {
       margin: 50px 100px 30px 100px;
   }
+
+  .front-page-icon {
+      margin-top: 20px;
+      margin-bottom: -25px;
+    width: 15%;
+  }

@@ -83,6 +83,11 @@
           //console.log("email: " + email + " pw: " + password);
           //console.log("rsocial: " + companyName + " tname: " + tradingName + " addr: " + address);
       
+          if(!validarCPF(cpf)) { alert('CPF inválido!'); return; }
+          if(fullname == "") { alert('Nome inválido!'); return; }
+          if(!validateEmail(email)) { alert('E-mail inválido!'); return; }
+          if(password.length < 6) { alert('Senha inválida!'); passwordField.value = ""; return; }   
+
           var data = {
             uid: targetUid,
             cpf: cpf,
@@ -188,5 +193,82 @@
       });
       
     }
+
+    function validateEmail(email) {
+      //SIMPLE TEST
+      //var re = /\S+@\S+/; console.log("estive aq "   + re + " " + re.test(email));
+      //99.99% EFFICIENCY 
+      var re = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;  
+      return re.test(email);
+  }
+
+  function validarCPF(cpf) {	
+    
+      cpf = cpf.replace(/[^\d]+/g,'');	
+
+      console.log("CPF ->" + cpf);
+    
+      if(cpf == '') return false;	
+    
+      // Elimina CPFs invalidos conhecidos	
+    
+      if (cpf.length != 11 || 
+    
+        cpf == "00000000000" || 
+    
+        cpf == "11111111111" || 
+    
+        cpf == "22222222222" || 
+    
+        cpf == "33333333333" || 
+    
+        cpf == "44444444444" || 
+    
+        cpf == "55555555555" || 
+    
+        cpf == "66666666666" || 
+    
+        cpf == "77777777777" || 
+    
+        cpf == "88888888888" || 
+    
+        cpf == "99999999999")
+    
+          return false;		
+    
+      // Valida 1o digito	
+    
+      add = 0;	
+    
+      for (i=0; i < 9; i ++)		
+        add += parseInt(cpf.charAt(i)) * (10 - i);	
+    
+        rev = 11 - (add % 11);	
+    
+        if (rev == 10 || rev == 11)		
+          rev = 0;	
+    
+        if (rev != parseInt(cpf.charAt(9)))		
+          return false;		
+    
+      // Valida 2o digito	
+    
+      add = 0;	
+    
+      for (i = 0; i < 10; i ++)		
+        add += parseInt(cpf.charAt(i)) * (11 - i);	
+  
+      rev = 11 - (add % 11);	
+    
+      if (rev == 10 || rev == 11)	
+        rev = 0;	
+    
+      if (rev != parseInt(cpf.charAt(10)))
+        return false;		
+    
+      return true;   
+    
+    }
+    
 
 }

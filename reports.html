@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>BloodApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/tabs.css">
+</head>
+<body>
+  <div class="wrapper">
+    <main>
+      <header>
+        <h1>BloodApp</h1>
+        <!--p><em>Welcome &ltuser&gt. Your at messaging screen.</em></p-->
+        <p><em>Bem Vindo a tela de relatórios.</em></p>
+        
+      </header>
+
+      <button class="button-back-arrow" title="back-arrow" id="button-back-arrow" >
+          <img src="/img/back_empty.png" alt="">
+      </button>
+
+      <div class="container">
+      <div class="tab">
+          <button class="tablinks" onclick="openCity(event, 'bloodtype')">Tipo Sanguíneo</button>
+          <button class="tablinks" onclick="openCity(event, 'building-info')">Hemocentros</button>
+          <button class="tablinks" onclick="openCity(event, 'appuser-info')">Usuários</button>
+        </div>
+        
+        <div id="bloodtype" class="tabcontent">
+          <h3>Tipo Sanguíneo</h3>
+             <table id="tbl_bloodtype_list" border="1" style="width:100%">
+                <tr>
+                    <td>Tipo</td><td>Qtd.</td>
+                </tr>
+             </table>
+        </div>
+        
+        <div id="building-info" class="tabcontent">
+          <h3>Informações de Hemocentros</h3>
+          <table id="tbl_building_list" border="1" style="width:100%; margin-right: 75px;">
+              <tr>
+                  <td>Tipo</td><td>Qtd.</td>
+              </tr>
+           </table>
+        </div>
+        
+        <div id="appuser-info" class="tabcontent">
+          <h3>Infomações de Usuários</h3>
+          <table id="tbl_appusers_list" border="1" style="width:100%; margin-right: 75px;">
+              <tr>
+                  <td>Tipo</td><td>Qtd.</td>
+              </tr>
+           </table>
+        </div>
+        
+        <script>
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        </script>
+
+
+        </div>
+      
+
+    
+
+    </main>
+
+    <!--h3>Message List</h3>
+    
+         <table id="tbl_users_list" border="1">
+            <tr>
+                <td>#ID</td>
+                <td>MESSAGE</td>
+            </tr>
+         </table-->
+
+    <footer>
+      <small><a href="">View Source</a></small>
+    </footer>
+  </div>
+
+  <!-- Firebase SDK -->
+  <!--script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+  <script src="firebase.js"></script-->
+
+  <script src="/__/firebase/5.5.1/firebase.js"></script>
+  <script src="/__/firebase/init.js"></script>
+
+  <script src="/js/reports.js"></script>
+</body>
+</html>

@@ -70,7 +70,6 @@
   }
 
   function saveBuilding() {
-
     var cnpj = cnpjField.value;
     var companyName = companyNameField.value;
     var tradingName = tradingNameField.value;
@@ -80,6 +79,13 @@
     var buid = 0;
     //console.log("email: " + email + " pw: " + password);
     //console.log("rsocial: " + companyName + " tname: " + tradingName + " addr: " + address);
+
+    if(!validarCNPJ(cnpj)) { alert('CNPJ inválido!'); return; }
+    if(companyName == "" || tradingName == "") { alert('Nome inválido!'); return; }
+    if(address == "") { alert('Endereço inválido!'); return; }
+    if(!validateEmail(email)) { alert('E-mail inválido!'); return; }
+    if(password.length < 6) { alert('Senha inválida!'); passwordField.value = ""; return; }
+    
 
     var data = {
       uid: targetUid,
@@ -93,7 +99,7 @@
       buid: targetUid
   }
 
-    if(data.uid) {
+   if(data.uid) {
       updateBuilding(data);
     } else {
       newBuilding(data);
@@ -146,5 +152,104 @@
         console.log(error); */
         });
   }
+
+  
+
+function validateEmail(email) {
+    //SIMPLE TEST
+    //var re = /\S+@\S+/; console.log("estive aq "   + re + " " + re.test(email));
+    //99.99% EFFICIENCY 
+    var re = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;  
+    return re.test(email);
+}
+
+  //validar CNPJ
+  function validarCNPJ(cnpj) {
+
+        cnpj = cnpj.replace(/[^\d]+/g,'');
+    
+     console.log("cnpj ->" + cnpj);
+    
+        if(cnpj == '') return false;
+    
+        if (cnpj.length != 14)
+            return false;
+    
+     
+    
+        // Elimina CNPJs invalidos conhecidos
+    
+        if (cnpj == "00000000000000" || 
+    
+            cnpj == "11111111111111" || 
+    
+            cnpj == "22222222222222" || 
+    
+            cnpj == "33333333333333" || 
+    
+            cnpj == "44444444444444" || 
+    
+            cnpj == "55555555555555" || 
+    
+            cnpj == "66666666666666" || 
+    
+            cnpj == "77777777777777" || 
+    
+            cnpj == "88888888888888" || 
+    
+            cnpj == "99999999999999")
+    
+            return false;
+    
+             
+    
+        // Valida DVs
+    
+        tamanho = cnpj.length - 2
+    
+        numeros = cnpj.substring(0,tamanho);
+    
+        digitos = cnpj.substring(tamanho);
+    
+        soma = 0;
+    
+        pos = tamanho - 7;
+    
+        for (i = tamanho; i >= 1; i--) {
+          soma += numeros.charAt(tamanho - i) * pos--;
+    
+          if (pos < 2)
+                pos = 9;
+    
+        }
+    
+        resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    
+        if (resultado != digitos.charAt(0))
+            return false;
+    
+        tamanho = tamanho + 1;
+    
+        numeros = cnpj.substring(0,tamanho);
+    
+        soma = 0;
+
+        pos = tamanho - 7;
+    
+        for (i = tamanho; i >= 1; i--) {
+          soma += numeros.charAt(tamanho - i) * pos--;
+    
+          if (pos < 2)
+                pos = 9;
+        }
+    
+        resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    
+        if (resultado != digitos.charAt(1))
+              return false;
+  
+        return true;
+
+    }
 
 }
