@@ -116,7 +116,7 @@
     updates['/users/' + data.uid] = data;
     FIREBASE_DATABASE.ref().update(updates);
 
-    alert('The user was saved successfully!');
+    alert('Empresa cadastrada  com sucesso!');
     /*companyNameField.value = "";
     tradingNameField.value = "";
     addressField.value = "";

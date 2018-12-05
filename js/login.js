@@ -12,12 +12,16 @@
   const signOutButton = document.getElementById('sign-out');
   const txtEmail = document.getElementById('email');
   const txtPass = document.getElementById('password');
+  const resetPasswordLink = document.getElementById('resetPassword');
   
   /* ========================
     Event Listeners
   ======================== */
 
+  txtPass.addEventListener('keypress', function (e) { 
+    var key = e.which || e.keyCode; if (key === 13) { signIn();}});
   signInButton.addEventListener('click', signIn);
+  resetPasswordLink.addEventListener('click', resetPassword);
   //signOutButton.addEventListener('click', signOut);
 
   /* ========================
@@ -29,7 +33,21 @@
     const email = txtEmail.value;
     const pass = txtPass.value;
 
-    FIREBASE_AUTH.signInWithEmailAndPassword(email, pass);
+    FIREBASE_AUTH.signInWithEmailAndPassword(email, pass)
+    .catch(function(error) { // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      if (errorCode === 'auth/wrong-password') {
+        alert('Senha inválida.');
+      } else if (errorCode === 'auth/invalid-email') {
+        alert('E-mail Inválido.');
+      } else if (errorCode === 'auth/user-not-found') {
+        alert('Usuário não encontrado.');
+      } else {
+        alert(errorMessage);
+      }
+      console.log(error);
+    });
     //Promise.catch(e => console.log(e.message));   
   }
 
@@ -52,7 +70,7 @@
         setTimeout(function() {
           //your code to be executed after 1 second
           window.location.pathname = 'main.html'
-        }, 2000);
+        }, 1500);
     
 
         
@@ -62,6 +80,19 @@
     }
   });
 
+  function resetPassword() {
+    var sendEmailAddress = prompt("Por favor, informe seu email para enviarmos a recuperação de senha:", "");
+    if (sendEmailAddress != null) {  
+      setTimeout(function() {
+        FIREBASE_AUTH.sendPasswordResetEmail(sendEmailAddress).then(function() {
+          console.log("Email sent to ", sendEmailAddress);
+        }).catch(function(error) {
+          console.log("An error happened... ", sendEmailAddress);
+        });
+
+      }, 1000);//your code to be executed after 1 second
+    }
+  }
   function getUserData() {
     FIREBASE_DATABASE.ref('/users/'+ FIREBASE_AUTH.currentUser.uid).once('value')
     .then((snapshot) => {

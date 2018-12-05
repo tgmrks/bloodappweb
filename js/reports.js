@@ -126,7 +126,7 @@
                console.log(snapshot.val());
                snpqtd = Object.keys(snapshot.val()).length;
                 //  admin   building    user
-               var ptCount = {'amount': snpqtd,	'Masculino': 0, 'Feminino': 0};
+               var ptCount = {'Cadastrados': snpqtd,	'Masculino': 0, 'Feminino': 0};
                snapshot.forEach(function(data) {
                 if("Masculino" == data.val().gender) ptCount["Masculino"]++;  
                 if("Feminino" == data.val().gender) ptCount["Feminino"]++;

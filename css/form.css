@@ -107,3 +107,26 @@ div div {
       margin-bottom: -25px;
     width: 15%;
   }
+
+  #resetPassword {
+    text-decoration: underline;
+  }
+
+  /* mouse over link */
+  #resetPassword:hover {
+    color: #E70174;
+  }
+
+  #resetPassword:link {
+    color: #380000;
+  }
+
+/* visited link */
+ #resetPassword:visited {
+    color: #2F0253;
+ }
+
+/* selected link */
+ #resetPassword:active {
+    color: #0000FF;
+ }

@@ -125,6 +125,7 @@
           date: today
     
         }).then(() => {
+          alert('Mensagem enviada com sucesso!');
           document.getElementById('notification-message').value = "";
         })
     });  

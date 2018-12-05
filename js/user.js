@@ -130,7 +130,7 @@
       updates['/users/' + data.uid] = data;
       FIREBASE_DATABASE.ref().update(updates);
   
-      alert('The user was saved successfully!');
+      alert('Usuário salvo com sucesso!');
       /*companyNameField.value = "";
       tradingNameField.value = "";
       addressField.value = "";
